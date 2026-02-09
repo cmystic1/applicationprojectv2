@@ -93,11 +93,12 @@ function Microsoft() {
             window.removeEventListener('keyup', handleKeyUp, { capture: true });
         };
     }, [escHoldStart]);
+
     useEffect(() => {
         const secondAudio = new Audio("/microsoft/censor-beep-2.mp3");
         const playAudio = () => {
-            secondAudio.currentTime = 0; 
-            secondAudio.play().catch(() => { }); 
+            secondAudio.currentTime = 0;
+            secondAudio.play().catch(() => { });
         };
 
         const interval = setInterval(playAudio, 5000);
@@ -150,6 +151,72 @@ function Microsoft() {
                     <span>Microsoft Support</span>
                     <span className="footer-phone">020 4549 4912</span>
                 </div>
+
+                <div style={{
+                    position: 'absolute',
+                    right: '20px',
+                    bottom: '50%',
+                    transform: 'translateY(-50%)',
+                    animation: 'jump 1.2s infinite ease-in-out',
+                    marginBottom: '70px'
+                }}>
+                    <div style={{
+                        position: 'relative',
+                        background: '#fff',
+                        border: '3px solid #ffcc00',
+                        borderRadius: '12px',
+                        padding: '12px 20px',
+                        boxShadow: '0 4px 15px rgba(0,0,0,0.4)',
+                        fontWeight: 'bold',
+                        color: '#000',
+                        fontSize: '18px',
+                        whiteSpace: 'nowrap',
+                        textAlign: 'center'
+                    }}>
+                        <div style={{ color: '#0067c5', fontSize: '22px', marginBottom: '4px' }}>
+                            <img src="/microsoft/logo.webp" alt="Windows Logo" className="footer-logo" />
+                            &nbsp;Microsoft
+                        </div>
+                        <div style={{ color: '#0067c5' }}>
+                            Microsoft Support
+                        </div>
+                        <div style={{
+                            color: '#d32f2f',
+                            fontSize: '24px',
+                            fontWeight: 'bold',
+                            marginTop: '8px'
+                        }}>
+                            020 4549 4912
+                        </div>
+
+                        <div style={{
+                            position: 'absolute',
+                            bottom: '-20px',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            width: '0',
+                            height: '0',
+                            borderLeft: '20px solid transparent',
+                            borderRight: '20px solid transparent',
+                            borderTop: '20px solid #ffcc00',
+                            zIndex: '1'
+                        }} />
+
+                        <div style={{
+                            position: 'absolute',
+                            bottom: '-16px',
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            width: '0',
+                            height: '0',
+                            borderLeft: '18px solid transparent',
+                            borderRight: '18px solid transparent',
+                            borderTop: '18px solid #fff',
+                            zIndex: '2'
+                        }} />
+                    </div>
+                </div>
+
                 <div className="footer-marquee">
                     <div className="marquee-content">
                         <span>

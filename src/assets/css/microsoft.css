@@ -247,3 +247,8 @@ body {
 .login-button:hover {
     background: #4a6cc8;
 }
+
+@keyframes jump {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-20px); }
+}
