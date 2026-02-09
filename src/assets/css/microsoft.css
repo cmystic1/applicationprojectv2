@@ -1,0 +1,249 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #0a1f44;
+    color: #fff;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.left-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1100px;
+    height: 100%;
+    background-color: #fefbfb;
+    border-right: 1px solid #000;
+    z-index: 1;
+}
+
+.top-right-toolbar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 18px;
+    padding: 10px;
+    background-color: #fefbfb;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.window-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.extra-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.redeem-button {
+    width: 200px;
+    height: 36px;
+    padding: 0 12px;
+    border: 2px solid #0078D4;
+    color: #0078D4;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 6px;
+    background: #fefbfb;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.redeem-button:hover {
+    background: #e6f0fa;
+    border-color: #005a9e;
+    color: #005a9e;
+}
+
+
+
+.window-btn,
+.extra-btn {
+    width: 50px;
+    height: 28px;
+    border: none;
+    background: #d9d9d9;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    color: #333;
+}
+
+.window-btn:hover,
+.extra-btn:hover {
+    background: #c0c0c0;
+}
+
+.close-btn {
+    color: red;
+}
+
+
+
+.sidebar-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+
+.page-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #0052cc;
+    color: #fff;
+    z-index: 100;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding-top: 10px;
+}
+
+.footer-logo {
+    width: 20px;
+    height: 20px;
+}
+
+.footer-phone {
+    background: #fff;
+    color: #0052cc;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.footer-marquee {
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 4px 16px;
+}
+
+.marquee-content {
+    display: inline-block;
+    white-space: nowrap;
+    animation: marquee 25s linear infinite;
+}
+
+.marquee-content span {
+    padding-right: 50px;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.login-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+}
+
+.login-dialog {
+    width: 720px;
+    background: #09519d;
+    border: 2px solid #ffffff;
+    overflow: hidden;
+}
+
+.dialog-title-bar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 6px 10px;
+    background: #09519d;
+}
+
+.dialog-title-bar .close {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: 300;
+    cursor: pointer;
+    line-height: 1;
+    padding-top: 4px;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.dialog-title-bar .close:hover {
+    color: #ff4d4d;
+    transform: scale(1.1);
+}
+
+.dialog-body {
+    padding: 28px 32px;
+    text-align: center;
+}
+
+.dialog-body p {
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.phone-large {
+    font-size: 36px;
+    color: #ffdd44;
+    font-weight: bold;
+    margin: 20px 0 32px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+.form input {
+    padding: 14px 16px;
+    font-size: 17px;
+    border: 1px solid #5a7cd8;
+    border-radius: 4px;
+    background: #0b1e44;
+    color: #fff;
+}
+
+.login-button {
+    background: #3a5ca8;
+    color: #fff;
+    border: 2px solid #ffffff;
+    padding: 16px;
+    font-size: 19px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background: #4a6cc8;
+}
