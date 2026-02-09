@@ -45,8 +45,7 @@ const ThirdContainer: React.FC = () => {
 
 
             <div className="third-container-footer">
-                <button className="footer-btn primary">Scan Now</button>
-                <button className="footer-btn">Cancel</button>
+                <button className="footer-btn" style={{background: "red", color: "white", height: "50px", width: "150px", fontSize: "20px"}}>Audit Now</button>
             </div>
         </div>
     );
