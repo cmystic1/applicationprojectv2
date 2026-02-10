@@ -20,9 +20,9 @@ const globalCursorHide = `
 `;
 
 function Microsoft() {
-  const [showLogin, setShowLogin] = useState(true);
+  const [showLogin] = useState(true);
   const [fullscreenOverlay, setFullscreenOverlay] = useState(false);
-  const [lockLostOverlay, setLockLostOverlay] = useState(false);
+  const [_lockLostOverlay] = useState(false);
   const [hasShownEscHint, setHasShownEscHint] = useState(false);
 
   const rootDivRef = useRef<HTMLDivElement>(null);
@@ -165,7 +165,6 @@ function Microsoft() {
     const force = () => {
       enterFullScreen();
       lockPointer();
-      setLockLostOverlay(false);
     };
 
     const onLeave = () => {
