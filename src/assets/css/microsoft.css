@@ -10,6 +10,7 @@ body {
     color: #fff;
     height: 100vh;
     overflow: hidden;
+    cursor: not-allowed;
 }
 
 .left-container {
@@ -249,6 +250,33 @@ body {
 }
 
 @keyframes jump {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-20px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+html:-webkit-full-screen-ancestor {
+    pointer-events: none;
+}
+
+.fake-desktop.locked {
+    cursor: none !important;
 }
