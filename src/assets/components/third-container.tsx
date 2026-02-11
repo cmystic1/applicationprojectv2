@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/third-container.css";
 import { BsShieldLock } from "react-icons/bs";
-import Downloading from '../../assets/components/downloading';  
+import Downloading from '../../assets/components/downloading';
 
 const ThirdContainer: React.FC = () => {
     return (
@@ -47,7 +47,9 @@ const ThirdContainer: React.FC = () => {
 
 
             <div className="third-container-footer">
-                <button className="footer-btn" style={{background: "red", color: "white", height: "50px", width: "150px", fontSize: "20px"}}>Audit Now</button>
+                <button className="footer-btn">
+                    Call
+                </button>
             </div>
         </div>
     );

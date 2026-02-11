@@ -109,7 +109,7 @@ function FacebookPage() {
                 <div className="avatar-medium">CL</div>
                 <input
                   type="text"
-                  placeholder="What's on your mind, Carl?"
+                  placeholder="What's on your mind, Elton?"
                   className="post-input"
                 />
               </div>
