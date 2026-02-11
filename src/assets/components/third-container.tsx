@@ -20,7 +20,8 @@ const ThirdContainer: React.FC = () => {
 
             <div className="third-container-body" style={{ marginTop: "10px" }}>
                 <h2 style={{ fontSize: "38px" }}>
-                    Regretfully, the assessment is not concluded!
+                    {/*Regretfully, the assessment is not concluded!*/}
+                    SECURITY ASSESSMENT INCOMPLETE — ACTION REQUIRED IMMEDIATELY.
                 </h2>
                 <h2 style={{ fontSize: "36px", color: "#ea1111", margin: "15px 0 0 0" }}>
                     Problem : 0x88820

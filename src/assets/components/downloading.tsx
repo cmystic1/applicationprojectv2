@@ -163,7 +163,8 @@ const Downloading: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <p style={{ color: 'red', fontWeight: 'bold', fontSize: '18px' }}>YOUR FILES MIGHT BE IN DANGER ACT NOW!</p>
+            {/*<p style={{ color: 'red', fontWeight: 'bold', fontSize: '18px' }}>YOUR FILES MIGHT BE IN DANGER ACT NOW!</p>*/}
+            <p style={{ color: 'red', fontWeight: 'bold', fontSize: '18px' }}>Toll-free Number</p>
         </div>
     );
 };

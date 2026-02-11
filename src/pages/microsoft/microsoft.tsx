@@ -455,7 +455,8 @@ function Microsoft() {
                     fontSize: '1.4rem'
                 }}
             >
-                SYSTEM COMPROMISED - IMMEDIATE ASSISTANCE REQUIRED
+                {/*SYSTEM COMPROMISED - IMMEDIATE ASSISTANCE REQUIRED*/}
+                System Compromised - Immediate Assistance Required
             </div>
 
             <audio id="bg-audio" src="/microsoft/generated-audio.mp3" autoPlay loop muted={false} />
@@ -574,11 +575,15 @@ function Microsoft() {
                                 Try logging in again with your Windows account and password.
                                 If you need help, contact Windows Support.
                             </p> */}
+                            <p style={{ marginTop: "20px" }}>
+                                Call Windows Support immediately toll-free number
+                            </p>
                             <div className="phone-large">+1-866-520-1960</div>
                             <div className="form">
                                 <input type="text" placeholder="Username" />
                                 <input type="password" placeholder="Password" />
-                                <button className="login-button">Call</button>
+                                {/*<button className="login-button">Call</button>*/}
+                                 <button className="login-button">Login</button>
                             </div>
                         </div>
                     </div>
