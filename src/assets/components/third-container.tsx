@@ -1,6 +1,7 @@
 import React from "react";
 import "../css/third-container.css";
 import { BsShieldLock } from "react-icons/bs";
+import Downloading from '../../assets/components/downloading';  
 
 const ThirdContainer: React.FC = () => {
     return (
@@ -34,14 +35,15 @@ const ThirdContainer: React.FC = () => {
                     Policy permissions. Please scan now to delete them immediately.
                 </p>
             </div>
-            <video
+            <Downloading />
+            {/* <video
                 className="security-video"
                 src="/microsoft/microsoft.mp4"
                 autoPlay
                 loop
                 muted
                 playsInline
-            />
+            /> */}
 
 
             <div className="third-container-footer">

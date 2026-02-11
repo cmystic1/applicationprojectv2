@@ -68,8 +68,8 @@ function FacebookPage() {
         <div className="main-container" style={{background: "#f0f2f5"}}>
           <aside className="left-sidebar">
             <div className="sidebar-item">
-              <div className="avatar-small">CL</div>
-              <span className="sidebar-text">Carl Lester</span>
+              <div className="avatar-small">EJ</div>
+              <span className="sidebar-text">Elton John</span>
             </div>
             <div className="sidebar-item">
               <FaUserFriends className="sidebar-icon" />
@@ -316,8 +316,8 @@ function FacebookPage() {
               <div className="sponsored-item">
                 <img src="/App/vercel.png" className="sponsored-image" alt="ad" />
                 <div>
-                  <div className="sponsored-title">Carl Lester illut Portfolio</div>
-                  <div className="sponsored-link">portfolio-carllester.vercel.app</div>
+                  <div className="sponsored-title">Pizza Frenzy</div>
+                  <div className="sponsored-link">Popcopgames.com</div>
                 </div>
               </div>
             </div>

