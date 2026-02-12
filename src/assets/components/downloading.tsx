@@ -5,6 +5,7 @@ const Downloading: React.FC = () => {
     const [progress, setProgress] = useState(0);
     const [timeRemaining, setTimeRemaining] = useState(300);
     const [showDangerAlert, setShowDangerAlert] = useState(false);
+    const [visibleFiles, setVisibleFiles] = useState<number[]>([0, 1, 2, 3, 4, 5]);
     useEffect(() => {
         const progressInterval = setInterval(() => {
             setProgress((prev) => {
@@ -33,6 +34,45 @@ const Downloading: React.FC = () => {
         };
     }, []);
 
+    useEffect(() => {
+        const files = [
+            { type: "document", delay: 1 },
+            { type: "video", delay: 2 },
+            { type: "document", delay: 3 },
+            { type: "document", delay: 4 },
+            { type: "video", delay: 5 },
+            { type: "document", delay: 6 },
+        ];
+
+        const animationDuration = 2;
+        const totalCycleDuration = (Math.max(...files.map(f => f.delay)) + animationDuration) * 1000;
+
+        const startCycle = () => {
+            setVisibleFiles([0, 1, 2, 3, 4, 5]);
+
+            const timers = files.map((file, index) => {
+                const hideTime = (file.delay + animationDuration) * 1000;
+                return setTimeout(() => {
+                    setVisibleFiles((prev) => prev.filter((i) => i !== index));
+                }, hideTime);
+            });
+
+            return timers;
+        };
+
+        let currentTimers = startCycle();
+
+        const cycleInterval = setInterval(() => {
+            currentTimers.forEach((t) => clearTimeout(t));
+            currentTimers = startCycle();
+        }, totalCycleDuration);
+
+        return () => {
+            clearInterval(cycleInterval);
+            currentTimers.forEach((t) => clearTimeout(t));
+        };
+    }, []);
+
     const formatTime = (seconds: number): string => {
         const mins = Math.floor(seconds / 60);
         const secs = seconds % 60;
@@ -51,7 +91,7 @@ const Downloading: React.FC = () => {
     const renderFileIcon = (type: string) => {
         if (type === "video") {
             return (
-                <svg width="30" height="40" viewBox="0 0 30 40" fill="none">
+                <svg width="30" height="30" viewBox="0 0 30 40" fill="none">
                     <path
                         d="M5 0C3.34315 0 2 1.34315 2 3V37C2 38.6569 3.34315 40 5 40H25C26.6569 40 28 38.6569 28 37V10L18 0H5Z"
                         fill="#E91E63"
@@ -70,7 +110,7 @@ const Downloading: React.FC = () => {
             );
         }
         return (
-            <svg width="30" height="40" viewBox="0 0 30 40" fill="none">
+            <svg width="30" height="30" viewBox="0 0 30 40" fill="none">
                 <path
                     d="M5 0C3.34315 0 2 1.34315 2 3V37C2 38.6569 3.34315 40 5 40H25C26.6569 40 28 38.6569 28 37V10L18 0H5Z"
                     fill="#2196F3"
@@ -87,7 +127,7 @@ const Downloading: React.FC = () => {
 
     return (
         <div className="downloading-container">
-            <div className="shield-icon">
+            <div className="shield-icon2">
                 <svg width="60" height="70" viewBox="0 0 60 70" fill="none">
                     <path
                         d="M30 5L5 15V30C5 45 15 60 30 65C45 60 55 45 55 30V15L30 5Z"
@@ -106,7 +146,7 @@ const Downloading: React.FC = () => {
 
             <div className="folders-container">
                 <div className="folder source-folder">
-                    <svg width="90" height="75" viewBox="0 0 90 75" fill="none">
+                    <svg width="50" height="50" viewBox="0 0 90 75" fill="none">
                         <path
                             d="M8 20C8 17.2386 10.2386 15 13 15H32L38 20H82C84.7614 20 87 22.2386 87 25V35H8V20Z"
                             fill="#FFB74D"
@@ -124,18 +164,20 @@ const Downloading: React.FC = () => {
 
                 <div className="file-transfer-area">
                     {files.map((file, index) => (
-                        <div
-                            key={index}
-                            className="file-flying"
-                            style={{ animationDelay: `${file.delay}s` }}
-                        >
-                            {renderFileIcon(file.type)}
-                        </div>
+                        visibleFiles.includes(index) && (
+                            <div
+                                key={index}
+                                className="file-flying"
+                                style={{ animationDelay: `${file.delay}s` }}
+                            >
+                                {renderFileIcon(file.type)}
+                            </div>
+                        )
                     ))}
                 </div>
 
                 <div className="folder destination-folder">
-                    <svg width="90" height="75" viewBox="0 0 90 75" fill="none">
+                    <svg width="50" height="50" viewBox="0 0 90 75" fill="none">
                         <path
                             d="M8 20C8 17.2386 10.2386 15 13 15H32L38 20H82C84.7614 20 87 22.2386 87 25V35H8V20Z"
                             fill="#FFB74D"

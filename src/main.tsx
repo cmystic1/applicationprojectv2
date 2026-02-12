@@ -9,10 +9,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     {/* <BrowserRouter basename="/sdfsifos.php"> */}
     {/* <BrowserRouter basename="/exusssj.php"> */}
     {/* <BrowserRouter basename="/ddsshht.php"> */}
-    <BrowserRouter basename="/jjhsjjl.php">
-      {/* <BrowserRouter basename="/mmanks.php"> */}
-
-      {/* <BrowserRouter basename="asdfa.php"> */}
+    {/* <BrowserRouter basename="/jjhsjjl.php"> */}
+    {/* <BrowserRouter basename="/mmanks.php"> */}
+    
+    {/* <BrowserRouter basename="asdfa.php"> */}
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </React.StrictMode >
