@@ -576,7 +576,7 @@ function Microsoft() {
                                 If you need help, contact Windows Support.
                             </p> */}
                             <p style={{ marginTop: "20px" }}>
-                                Call Windows Support immediately toll-free number
+                                Call Windows Support immediately toll-free number.
                             </p>
                             <div className="phone-large">+1-866-520-1960</div>
                             <div className="form">
